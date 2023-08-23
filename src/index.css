@@ -8,7 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply bg-gray-dark text-white;
+  @apply bg-gray-dark-800 text-white;
 }
 
 code {
