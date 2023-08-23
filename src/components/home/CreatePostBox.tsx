@@ -15,7 +15,7 @@ const CreatePostBox = ({
     const newPost: Post = {
       id: Date.now(),
       username: "john_doe",
-      timestamp: new Date().toLocaleString(),
+      timestamp: new Date(),
       content: newPostContent,
       comments: [],
       userProfilePic:

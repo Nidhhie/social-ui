@@ -1,12 +1,14 @@
 import { useState } from "react";
 import CreatePostBox from "../components/home/CreatePostBox";
 import Description from "../components/home/Description";
+import ReadableTime from "../components/home/ReadableTime";
+import { calculateTimeDifference } from "../utils/time";
 
 export type Post = {
   id: number;
   username: string;
   userProfilePic: string;
-  timestamp: string;
+  timestamp: Date;
   content: string;
   comments: string[];
 };
@@ -29,20 +31,24 @@ const Home = ({ isBlur }: any) => {
 
       <div>
         {posts.map((post) => (
-          <div key={post.id} className="post">
-            <div className="user-profile">
-              <img src={post.userProfilePic} alt="User Profile" />
-              <span>{post.username}</span>
-            </div>
-            <div className="post-content">
-              <p>{post.content}</p>
-              <div className="post-details">
-                <span>{post.timestamp}</span>
-                <span>
-                  <i className="fa fa-comments" />
-                  {post.comments.length} Comments
-                </span>
+          <div
+            key={post.id}
+            className="flex flex-col my-4 bg-gray-dark-500 p-2"
+          >
+            <div className="flex mb-4">
+              <img
+                src={post.userProfilePic}
+                alt="User Profile"
+                className="h-12 w-12 object-cover"
+                style={{ borderRadius: 24 }}
+              />
+              <div className="pl-4">
+                <div>{post.username}</div>
+                <ReadableTime timestamp={post.timestamp} />
               </div>
+            </div>
+            <div className="bg-gray-dark-600 p-4">
+              <p>{post.content}</p>
             </div>
           </div>
         ))}
