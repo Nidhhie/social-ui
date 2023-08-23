@@ -1,26 +1,60 @@
-export const isAuthenticated = (username: string, password: string) => {
-  const data = localStorage.getItem(username);
+type User = {
+  username: string;
+  email: string;
+  password: string;
+};
+export const isUserRegistered = (username: string, email: string) => {
+  const data = localStorage.getItem("users");
   if (data) {
-    let { pwd } = JSON.parse(data);
-    return atob(pwd) === password;
+    const users = JSON.parse(data);
+    return (
+      users.findIndex(
+        (user: User) => user.username === username || user.email === email
+      ) !== -1
+    );
   }
+
   return false;
 };
 
-export const registerUser = (username: string, password: string) => {
-  localStorage.setItem(
-    username,
-    JSON.stringify({ pwd: btoa(password), isLoggedIn: false })
-  );
+export const registerUser = (
+  username: string,
+  email: string,
+  password: string
+) => {
+  if (isUserRegistered(username, email)) {
+    throw new Error("User already registered");
+  } else {
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    users.push({
+      username,
+      email,
+      password: btoa(password),
+    });
+    localStorage.setItem("users", JSON.stringify(users));
+  }
 };
 
 export const loginUser = (username: string, password: string) => {
-  if (isAuthenticated(username, password)) {
-    localStorage.setItem(
-      username,
-      JSON.stringify({ pwd: btoa(password), isLoggedIn: true })
+  if (isUserRegistered(username, username)) {
+    const users = JSON.parse(localStorage.getItem("users")!);
+    const user = users.find(
+      (user: User) => user.username === username || user.email === username
     );
+
+    if (atob(user.password) === password) {
+      localStorage.setItem("authenticatedUser", JSON.stringify(user));
+    }
   } else {
     throw new Error("User not found");
   }
+};
+
+export const logout = () => {
+  return localStorage.setItem("authenticatedUser", "");
+};
+
+export const isLoggedIn = () => {
+  console.log(localStorage.getItem("authenticatedUser"));
+  return !!localStorage.getItem("authenticatedUser");
 };

@@ -1,5 +1,5 @@
 const TextInput = (props: any) => {
-  const { id, label, placeholder, value, onChange, error } = props;
+  const { id, label, placeholder, value, onChange, error, ...rest } = props;
   return (
     <div className="w-full my-2">
       <label
@@ -13,6 +13,7 @@ const TextInput = (props: any) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        {...rest}
         className="border rounded px-2 py-1 w-full bg-transparent border-font-gray-light"
       />
       {error && <div className="text-red-500">{error}</div>}

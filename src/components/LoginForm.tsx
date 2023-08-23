@@ -3,47 +3,41 @@ import { ModalType } from "../App";
 import { loginUser, registerUser } from "../utils/auth";
 import { validateInputs } from "../utils/validations";
 import TextInput from "./TextInput";
+import { useNavigate } from "react-router";
+import { LABELS } from "../constants";
 
-const LABELS: { [key in ModalType]: any } = {
-  login: {
-    label: "WELCOME BACK",
-    subLabel: "Log into your account",
-    footerLabel: " Not registered yet?",
-    footerLinkLabel: "Register →",
-    buttonLabel: "Login now",
-  },
-  register: {
-    label: "SIGN UP",
-    subLabel: "Create an account to continue",
-    footerLabel: "Already have an account?",
-    footerLinkLabel: "Login →",
-    buttonLabel: "Continue",
-  },
-};
-
-const Login = ({
+const LoginForm = ({
   toggleModal,
   modalType,
 }: {
-  toggleModal: (type: ModalType) => void;
+  toggleModal: (type: ModalType | null) => void;
   modalType: ModalType;
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<any>({});
+  const navigate = useNavigate();
   const isLoginScreen = modalType === "login";
 
   const handleLogin = () => {
     try {
-      const newErrors = validateInputs(password, username, "", isLoginScreen);
+      const newErrors = validateInputs(
+        password,
+        username,
+        email,
+        isLoginScreen
+      );
 
       if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
       } else if (isLoginScreen) {
         loginUser(username, password);
+        navigate("/home");
+        toggleModal(null);
       } else {
-        registerUser(username, password);
+        registerUser(username, email, password);
+        toggleModal("login");
       }
     } catch (err: any) {
       setErrors({ ...errors, err: err?.message });
@@ -76,14 +70,6 @@ const Login = ({
         {LABELS[modalType].label}
       </div>
       <div className="text-lg font-bold mb-4">{LABELS[modalType].subLabel}</div>
-      <TextInput
-        id={"username"}
-        label="Email or username"
-        placeholder="Enter your email or username"
-        value={username}
-        onChange={onChangeUsername}
-        error={errors.username}
-      />
       {!isLoginScreen && (
         <TextInput
           id={"email"}
@@ -94,7 +80,14 @@ const Login = ({
           error={errors.email}
         />
       )}
-
+      <TextInput
+        id={"username"}
+        label={LABELS[modalType].username}
+        placeholder={LABELS[modalType].usernamePlaceholder}
+        value={username}
+        onChange={onChangeUsername}
+        error={errors.username}
+      />
       <TextInput
         id={"password"}
         label="Password"
@@ -102,6 +95,7 @@ const Login = ({
         value={password}
         onChange={onChangePassword}
         error={errors.password}
+        type="password"
       />
 
       <button
@@ -123,4 +117,4 @@ const Login = ({
   );
 };
 
-export default Login;
+export default LoginForm;
