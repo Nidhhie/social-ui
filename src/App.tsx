@@ -1,29 +1,33 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./pages/Home";
 
-type ModalType = "" | "login" | "register";
+export type ModalType = "" | "login" | "register";
 const App: React.FC = () => {
-  const [modalType, setModalType] = useState<ModalType>("");
+  const [modalType, setModalType] = useState<ModalType>("login");
 
   const toggleModal = (type: ModalType) => {
     setModalType(type);
   };
 
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home isBlur={!!modalType} />} />
         </Routes>
       </BrowserRouter>
 
       {modalType && (
-        <div className="fixed inset-0 bg-black bg-opacity-50">
+        <div className="fixed inset-0 bg-transparent bg-opacity-50">
           <div className="w-96 p-6 bg-gray-800 rounded-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            {modalType === "login" ? <Login /> : <Register />}
+            {modalType === "login" ? (
+              <Login toggleModal={toggleModal} />
+            ) : (
+              <Register toggleModal={toggleModal} />
+            )}
           </div>
         </div>
       )}
