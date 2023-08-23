@@ -1,7 +1,8 @@
 import { useState } from "react";
+import CreatePostBox from "../components/home/CreatePostBox";
 import Description from "../components/home/Description";
 
-type Post = {
+export type Post = {
   id: number;
   username: string;
   userProfilePic: string;
@@ -9,26 +10,12 @@ type Post = {
   content: string;
   comments: string[];
 };
+
 const Home = ({ isBlur }: any) => {
-  const [newPostContent, setNewPostContent] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
 
-  const handleCreatePost = () => {
-    if (newPostContent.trim() === "") {
-      return;
-    }
-
-    const newPost: Post = {
-      id: Date.now(),
-      username: "john_doe",
-      userProfilePic: "path_to_profile_pic",
-      timestamp: new Date().toLocaleString(),
-      content: newPostContent,
-      comments: [],
-    };
-
-    setPosts([newPost, ...posts]);
-    setNewPostContent("");
+  const onCreatePost = (newPost: Post) => {
+    setPosts([...posts, newPost]);
   };
 
   return (
@@ -38,21 +25,8 @@ const Home = ({ isBlur }: any) => {
         content="How are you doing today? Would you like to share something with the
         community 🤗"
       />
-      <div className="flex flex-col my-4 bg-gray-dark-500 p-2">
-        <h4 className="text-font-gray text-md mb-2"> Create Post </h4>
-        <textarea
-          value={newPostContent}
-          onChange={(e) => setNewPostContent(e.target.value)}
-          placeholder="How are you feeling today?"
-          className="bg-gray-dark-600 rounded p-4"
-        />
-        <button
-          onClick={handleCreatePost}
-          className="bg-blue w-20 self-end py-2 my-4 text-sm"
-        >
-          Post
-        </button>
-      </div>
+      <CreatePostBox onCreateNewPost={onCreatePost} />
+
       <div>
         {posts.map((post) => (
           <div key={post.id} className="post">
