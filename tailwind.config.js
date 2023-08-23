@@ -8,9 +8,11 @@ module.exports = {
       colors: {
         "font-gray-light": "#C5C7CA",
         "font-gray-dark": "#6B6C70",
+        "font-gray": "7F8084",
         "gray-light": "#35373B",
         "gray-dark-800": "#131319",
         "gray-dark-500": "#27292D",
+        "gray-dark-600": "#191920",
         blue: "#4A96FF",
       },
       blur: {
