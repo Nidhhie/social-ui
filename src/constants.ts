@@ -20,3 +20,66 @@ export const LABELS: { [key in ModalType]: any } = {
     usernamePlaceholder: "Enter your username",
   },
 };
+
+export const MOCK_POSTS: any = [
+  {
+    id: "1",
+    username: "Nidhi Deswal",
+    timestamp: new Date(),
+    content:
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+    comments: [],
+    userProfilePic:
+      "https://i.pinimg.com/236x/54/6b/2d/546b2d4e9bddbcb894fa8e416739339b.jpg",
+    emoji: {
+      aliases: ["hand_with_index_and_middle_fingers_crossed"],
+      id: "crossed_fingers",
+      keywords: ["hand", "with", "index", "and", "middle", "good", "lucky"],
+      name: "Crossed Fingers",
+      native: "🤞🏿",
+      shortcodes: ":crossed_fingers::skin-tone-6:",
+      skin: 6,
+      unified: "1f91e-1f3ff",
+    },
+  },
+  {
+    id: "2",
+    username: "New User",
+    timestamp: new Date(),
+    content:
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+    comments: [],
+    userProfilePic:
+      "https://i.pinimg.com/236x/54/6b/2d/546b2d4e9bddbcb894fa8e416739339b.jpg",
+    emoji: {
+      aliases: ["hand_with_index_and_middle_fingers_crossed"],
+      id: "crossed_fingers",
+      keywords: ["hand", "with", "index", "and", "middle", "good", "lucky"],
+      name: "Crossed Fingers",
+      native: "🤞🏿",
+      shortcodes: ":crossed_fingers::skin-tone-6:",
+      skin: 6,
+      unified: "1f91e-1f3ff",
+    },
+  },
+  {
+    id: "3",
+    username: "Nidhi Deswal",
+    timestamp: new Date(),
+    content:
+      "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+    comments: [],
+    userProfilePic:
+      "https://i.pinimg.com/236x/54/6b/2d/546b2d4e9bddbcb894fa8e416739339b.jpg",
+    emoji: {
+      aliases: ["hand_with_index_and_middle_fingers_crossed"],
+      id: "crossed_fingers",
+      keywords: ["hand", "with", "index", "and", "middle", "good", "lucky"],
+      name: "Crossed Fingers",
+      native: "🤞🏿",
+      shortcodes: ":crossed_fingers::skin-tone-6:",
+      skin: 6,
+      unified: "1f91e-1f3ff",
+    },
+  },
+];

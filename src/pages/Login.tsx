@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ModalType } from "../App";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/login/LoginForm";
 import Modal from "../components/Modal";
 
 const Login = () => {

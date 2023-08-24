@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ModalType } from "../App";
-import { loginUser, registerUser } from "../utils/auth";
-import { validateInputs } from "../utils/validations";
-import TextInput from "./TextInput";
+import { ModalType } from "../../App";
+import { loginUser, registerUser } from "../../utils/auth";
+import { validateInputs } from "../../utils/validations";
+import TextInput from "./../TextInput";
 import { useNavigate } from "react-router";
-import { LABELS } from "../constants";
+import { LABELS } from "../../constants";
 
 const LoginForm = ({
   toggleModal,
