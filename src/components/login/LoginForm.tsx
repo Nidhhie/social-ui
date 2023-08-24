@@ -94,7 +94,7 @@ const LoginForm = ({
       {errors.err && <div className="text-red-500 my-2">{errors.err}</div>}
       <p className="mt-2">
         {LABELS[modalType].footerLabel}
-        <button onClick={onClickRegisterOrLogin} className="text-blue-500">
+        <button onClick={onClickRegisterOrLogin} className="text-blue-500 pl-2">
           <b>
             <u> {LABELS[modalType].footerLinkLabel} </u>
           </b>

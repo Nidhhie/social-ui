@@ -15,7 +15,7 @@ const ReadableTime = ({ timestamp }: { timestamp: Date }) => {
     }, 1000 * 60);
     updateTime();
   }, []);
-  return <div className="text-sm">{time}</div>;
+  return <div className="text-sm text-font-gray-light">{time}</div>;
 };
 
 export default ReadableTime;

@@ -44,6 +44,8 @@ export const loginUser = (username: string, password: string) => {
 
     if (atob(user.password) === password) {
       localStorage.setItem("authenticatedUser", JSON.stringify(user));
+    } else {
+      throw new Error("Incorrect Password");
     }
   } else {
     throw new Error("User not found");
@@ -55,7 +57,6 @@ export const logout = () => {
 };
 
 export const isLoggedIn = () => {
-  console.log("here");
   return !!localStorage.getItem("authenticatedUser");
 };
 

@@ -10,9 +10,12 @@ const CreatePostBox = ({
   const [newPostContent, setNewPostContent] = useState("");
   const { username } = getUserDetails();
   const [emoji, setEmoji] = useState<any>();
+  const [error, setError] = useState("");
+
   const id = useId();
   const handleCreatePost = () => {
     if (newPostContent.trim() === "" || !emoji) {
+      setError(!emoji ? "Please select an emoji" : "Please enter content");
       return;
     }
     const newPost: Post = {
@@ -31,6 +34,16 @@ const CreatePostBox = ({
     setEmoji(null);
   };
 
+  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewPostContent(e.target.value);
+    setError("");
+  };
+
+  const onChangeEmoji = (emoji: any) => {
+    setEmoji(emoji);
+    setError("");
+  };
+
   return (
     <div
       data-testid="create-post-box"
@@ -38,13 +51,14 @@ const CreatePostBox = ({
     >
       <h4 className="text-font-gray text-md mb-2"> Create Post </h4>
       <div className="relative">
-        <EmojiSelector setEmoji={setEmoji} emoji={emoji} />
+        <EmojiSelector setEmoji={onChangeEmoji} emoji={emoji} />
         <textarea
           value={newPostContent}
-          onChange={(e) => setNewPostContent(e.target.value)}
+          onChange={onChangeContent}
           placeholder="How are you feeling today?"
           className="bg-gray-dark-600 rounded-lg pt-5 pb pr-4 pl-16 w-full"
         />
+        {error && <div className="text-red-400 text-center"> {error} </div>}
       </div>
       <button
         onClick={handleCreatePost}

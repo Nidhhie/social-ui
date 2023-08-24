@@ -15,13 +15,13 @@ const PostBox = ({ post }: { post: Post }) => {
           style={{ borderRadius: 24 }}
         />
         <div className="pl-4">
-          <div>{post.username}</div>
+          <div className="text-gray-100">{post.username}</div>
           <ReadableTime timestamp={post.timestamp} />
         </div>
       </div>
-      <div className="flex bg-gray-dark-600 text-font-gray p-4">
+      <div className="flex bg-gray-dark-600 text-font-gray p-4 items-center">
         <div>
-          <div className="w-12 h-12 bg-gray-dark-500 text-2xl rounded-full text-center p-2 mr-2 mt-1">
+          <div className="w-12 h-12 bg-gray-dark-500 text-2xl rounded-full text-center p-2 mr-2">
             {post.emoji.native}
           </div>
         </div>

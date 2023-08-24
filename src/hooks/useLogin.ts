@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { validateInputs } from "../utils/validations";
 import { loginUser, registerUser } from "../utils/auth";
+import { useConfig } from "../context/ConfigContext";
 
 export const useLogin = (
   username: string,
@@ -12,6 +13,7 @@ export const useLogin = (
 ) => {
   const [errors, setErrors] = useState<any>({});
   const navigate = useNavigate();
+  const { setBlur } = useConfig();
 
   const handleLogin = () => {
     try {
@@ -26,6 +28,7 @@ export const useLogin = (
         setErrors(newErrors);
       } else if (isLoginScreen) {
         loginUser(username, password);
+        setBlur(false);
         navigate("/home");
       } else {
         registerUser(username, email, password);

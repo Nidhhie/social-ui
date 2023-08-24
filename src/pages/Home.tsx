@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreatePostBox from "../components/home/CreatePostBox";
 import Header from "../components/home/Header";
 import PostBox from "../components/home/PostBox";
 import { MOCK_POSTS } from "../constants";
+import { useConfig } from "../context/ConfigContext";
+import { getUserDetails } from "../utils/auth";
+import Login from "./Login";
 
 export type Post = {
   id: string;
@@ -16,25 +19,31 @@ export type Post = {
 
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>(MOCK_POSTS);
+  const { username } = getUserDetails();
+  const { blur, setBlur } = useConfig();
 
   const onCreatePost = (newPost: Post) => {
     setPosts([newPost, ...posts]);
   };
 
   return (
-    <div className="my-12 mx-8">
-      <Header
-        heading={"Hello Jane"}
-        content="How are you doing today? Would you like to share something with the
+    <>
+      {blur && <Login />}
+      <div className={`my-12 mx-8 ${blur && "blur-sm"}`}>
+        <Header
+          heading={"Hello " + username}
+          content="How are you doing today? Would you like to share something with the
         community 🤗"
-      />
-      <CreatePostBox onCreateNewPost={onCreatePost} />
-      <div>
-        {posts.map((post) => (
-          <PostBox key={post.id} post={post} />
-        ))}
+          setBlur={setBlur}
+        />
+        <CreatePostBox onCreateNewPost={onCreatePost} />
+        <div>
+          {posts.map((post) => (
+            <PostBox key={post.id} post={post} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router";
 import { logout } from "../../utils/auth";
 
-const Header = ({ heading, content }: { heading: string; content: string }) => {
-  const navigate = useNavigate();
-
+const Header = ({
+  heading,
+  content,
+  setBlur,
+}: {
+  heading: string;
+  content: string;
+  setBlur: any;
+}) => {
   const onLogout = () => {
     logout();
-
-    navigate("/");
+    setBlur(true);
   };
   return (
     <div className="mb-4">

@@ -2,6 +2,7 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ConfigProvider } from "./context/ConfigContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -29,7 +30,9 @@ const router = createBrowserRouter([
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
-      <RouterProvider router={router} />
+      <ConfigProvider>
+        <RouterProvider router={router} />
+      </ConfigProvider>
     </ErrorBoundary>
   );
 };
