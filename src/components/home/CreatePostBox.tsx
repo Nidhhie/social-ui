@@ -32,7 +32,10 @@ const CreatePostBox = ({
   };
 
   return (
-    <div className="flex flex-col my-4 bg-gray-dark-500 p-2 rounded-lg">
+    <div
+      data-testid="create-post-box"
+      className="flex flex-col my-4 bg-gray-dark-500 p-2 rounded-lg"
+    >
       <h4 className="text-font-gray text-md mb-2"> Create Post </h4>
       <div className="relative">
         <EmojiSelector setEmoji={setEmoji} emoji={emoji} />

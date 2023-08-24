@@ -4,7 +4,7 @@ import ReadableTime from "./ReadableTime";
 const PostBox = ({ post }: { post: Post }) => {
   return (
     <div
-      key={post.id}
+      data-testid="post-box"
       className="flex flex-col my-4 bg-gray-dark-500 p-2 rounded-lg"
     >
       <div className="flex mb-4">

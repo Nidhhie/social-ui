@@ -31,7 +31,7 @@ const Home = () => {
       <CreatePostBox onCreateNewPost={onCreatePost} />
       <div>
         {posts.map((post) => (
-          <PostBox post={post} />
+          <PostBox key={post.id} post={post} />
         ))}
       </div>
     </div>
