@@ -26,9 +26,7 @@ export const useLogin = (
         setErrors(newErrors);
       } else if (isLoginScreen) {
         loginUser(username, password);
-        toggleModal(null);
-        debugger;
-        navigate("home");
+        navigate("/home");
       } else {
         registerUser(username, email, password);
         toggleModal("login");
