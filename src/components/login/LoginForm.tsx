@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { ModalType } from "../../App";
-import { loginUser, registerUser } from "../../utils/auth";
-import { validateInputs } from "../../utils/validations";
 import TextInput from "./../TextInput";
-import { useNavigate } from "react-router";
 import { LABELS } from "../../constants";
+import { useLogin } from "../../hooks/useLogin";
 
 const LoginForm = ({
   toggleModal,
@@ -16,31 +14,19 @@ const LoginForm = ({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<any>({});
-  const navigate = useNavigate();
   const isLoginScreen = modalType === "login";
 
-  const handleLogin = () => {
-    try {
-      const newErrors = validateInputs(
-        password,
-        username,
-        email,
-        isLoginScreen
-      );
+  const { handleLogin, errors, setErrors } = useLogin(
+    username,
+    password,
+    email,
+    toggleModal,
+    isLoginScreen
+  );
 
-      if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors);
-      } else if (isLoginScreen) {
-        loginUser(username, password);
-        navigate("/home");
-        toggleModal(null);
-      } else {
-        registerUser(username, email, password);
-        toggleModal("login");
-      }
-    } catch (err: any) {
-      setErrors({ ...errors, err: err?.message });
+  const onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleLogin();
     }
   };
 
@@ -96,6 +82,7 @@ const LoginForm = ({
         onChange={onChangePassword}
         error={errors.password}
         type="password"
+        onKeyDown={onKeyDown}
       />
 
       <button

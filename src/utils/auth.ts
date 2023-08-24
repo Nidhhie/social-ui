@@ -55,6 +55,7 @@ export const logout = () => {
 };
 
 export const isLoggedIn = () => {
+  console.log(localStorage.getItem("authenticatedUser"));
   return !!localStorage.getItem("authenticatedUser");
 };
 

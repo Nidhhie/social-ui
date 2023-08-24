@@ -1,17 +1,12 @@
 import { useNavigate } from "react-router";
 import { logout } from "../../utils/auth";
 
-const Description = ({
-  heading,
-  content,
-}: {
-  heading: string;
-  content: string;
-}) => {
+const Header = ({ heading, content }: { heading: string; content: string }) => {
   const navigate = useNavigate();
 
   const onLogout = () => {
     logout();
+
     navigate("/");
   };
   return (
@@ -30,4 +25,4 @@ const Description = ({
     </div>
   );
 };
-export default Description;
+export default Header;

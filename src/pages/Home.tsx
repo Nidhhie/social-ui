@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CreatePostBox from "../components/home/CreatePostBox";
-import Description from "../components/home/Description";
+import Header from "../components/home/Header";
 import PostBox from "../components/home/PostBox";
 import { MOCK_POSTS } from "../constants";
 
@@ -11,10 +11,10 @@ export type Post = {
   timestamp: Date;
   content: string;
   comments: string[];
-  emoji?: any;
+  emoji: any;
 };
 
-const Home = ({ isBlur }: any) => {
+const Home = () => {
   const [posts, setPosts] = useState<Post[]>(MOCK_POSTS);
 
   const onCreatePost = (newPost: Post) => {
@@ -23,8 +23,8 @@ const Home = ({ isBlur }: any) => {
 
   return (
     <div className="my-12 mx-8">
-      <Description
-        heading={"Hello Jane "}
+      <Header
+        heading={"Hello Jane"}
         content="How are you doing today? Would you like to share something with the
         community 🤗"
       />

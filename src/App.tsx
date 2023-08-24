@@ -1,33 +1,30 @@
 import React from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import { isLoggedIn } from "./utils/auth";
 
 export type ModalType = "login" | "register";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: isLoggedIn() ? <Navigate to="/home" replace={true} /> : <Login />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/home",
+    element: isLoggedIn() ? <Home /> : <Navigate to="/" replace={true} />,
+  },
+]);
+
 const App: React.FC = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={isLoggedIn() ? <Navigate to="/home" replace /> : <Login />}
-          />
-          <Route
-            path="/home"
-            element={
-              isLoggedIn() ? (
-                <Home isBlur={false} />
-              ) : (
-                <Navigate to="/" replace />
-              )
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
